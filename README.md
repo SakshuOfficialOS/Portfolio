@@ -86,7 +86,7 @@ I design **premium thumbnails** focused on **clarity, contrast, and click intent
 > Put files in: `/portfolio/`
 
 <p align="center">
-  <img src="./portfolio/01.png" alt="Thumbnail 01" width="32%">
+  <img src="./portfolio/thumbnail-001.png" alt="Thumbnail 01" width="32%">
   <img src="./portfolio/02.png" alt="Thumbnail 02" width="32%">
   <img src="./portfolio/03.png" alt="Thumbnail 03" width="32%">
 </p>
