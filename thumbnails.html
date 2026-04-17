@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en" data-page="thumbnails">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thumbnails Library | Sakshu1347</title>
+  <meta name="description" content="Browse the Sakshu1347 thumbnails library with search, filtering, sorting, and a keyboard-friendly lightbox.">
+  <meta name="keywords" content="thumbnails library, Sakshu1347, Sakshu, YouTube thumbnails, portfolio gallery">
+  <meta name="author" content="Sakshu1347">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#07090d">
+  <meta property="og:title" content="Thumbnails Library | Sakshu1347">
+  <meta property="og:description" content="A searchable thumbnails library powered by JSON so new portfolio pieces can be added quickly.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://sakshu1347.github.io/thumbnails.html">
+  <meta property="og:image" content="assets/favicon.svg">
+  <meta property="og:site_name" content="Sakshu1347 Portfolio">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="library-page">
+  <div class="site-shell">
+    <header class="site-header library-header">
+      <div class="container nav-wrap">
+        <a class="brand" href="index.html#home" aria-label="Sakshu home">
+          <span class="brand-mark">S</span>
+          <span class="brand-copy">
+            <strong>Sakshu</strong>
+            <span>Sakshu1347</span>
+          </span>
+        </a>
+
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="Toggle navigation">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+        <nav class="site-nav" id="primary-nav" aria-label="Primary">
+          <a href="index.html#home">Home</a>
+          <a href="index.html#work">Work</a>
+          <a href="index.html#services">Services</a>
+          <a href="index.html#about">About</a>
+          <a href="index.html#contact">Contact</a>
+          <a href="thumbnails.html" aria-current="page">Thumbnails</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="section library-hero">
+        <div class="library-glow library-glow-a"></div>
+        <div class="library-glow library-glow-b"></div>
+        <div class="container library-hero-grid">
+          <div>
+            <p class="eyebrow">Gallery</p>
+            <h1>Thumbnails Library</h1>
+            <p class="library-copy">
+              A dedicated showcase for every thumbnail. Add new files inside <code>assets/thumbnails/</code>, create a matching entry in <code>assets/thumbnails.json</code>, and the grid updates automatically.
+            </p>
+          </div>
+
+          <aside class="help-box card-panel">
+            <h2>How to add new thumbnails</h2>
+            <ol>
+              <li>Add your image file to <code>assets/thumbnails/</code>.</li>
+              <li>Open <code>assets/thumbnails.json</code>.</li>
+              <li>Add a new object with the file name, title, category, date, tags, and optional client or link.</li>
+            </ol>
+            <p class="form-note">Use a local server like VS Code Live Server. <code>fetch()</code> will not load JSON properly from <code>file://</code>.</p>
+          </aside>
+        </div>
+      </section>
+
+      <section class="section section-library">
+        <div class="container">
+          <div class="library-controls card-panel">
+            <label class="control-block control-search">
+              <span>Search</span>
+              <input id="searchInput" type="search" placeholder="Search by title, client, or tag">
+            </label>
+
+            <label class="control-block control-sort">
+              <span>Sort</span>
+              <select id="sortSelect">
+                <option value="newest">Newest</option>
+                <option value="oldest">Oldest</option>
+                <option value="az">A-Z</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="library-toolbar">
+            <div id="categoryFilters" class="filter-chips" aria-label="Thumbnail categories"></div>
+            <p class="results-count"><span id="resultsCount">0</span> items</p>
+          </div>
+
+          <div id="thumbnailStatus" class="library-status" role="status" aria-live="polite">Loading thumbnails...</div>
+          <div id="thumbnailGrid" class="thumbnail-grid"></div>
+        </div>
+      </section>
+    </main>
+
+    <div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Thumbnail preview">
+      <div class="lightbox-backdrop" data-close-lightbox></div>
+      <div class="lightbox-dialog">
+        <button class="lightbox-close" type="button" aria-label="Close preview" data-close-lightbox>&times;</button>
+        <button class="lightbox-nav lightbox-prev" type="button" aria-label="Previous thumbnail" id="lightboxPrev">&#10094;</button>
+        <button class="lightbox-nav lightbox-next" type="button" aria-label="Next thumbnail" id="lightboxNext">&#10095;</button>
+
+        <div class="lightbox-media">
+          <img id="lightboxImage" src="" alt="">
+        </div>
+
+        <div class="lightbox-content">
+          <div class="lightbox-head">
+            <div>
+              <p class="eyebrow">Preview</p>
+              <h2 id="lightboxTitle">Thumbnail title</h2>
+            </div>
+            <a id="lightboxLink" class="button button-secondary lightbox-link" href="#" target="_blank" rel="noreferrer">Open Link</a>
+          </div>
+
+          <div class="lightbox-meta">
+            <div>
+              <span>Category</span>
+              <strong id="lightboxCategory">-</strong>
+            </div>
+            <div>
+              <span>Client</span>
+              <strong id="lightboxClient">-</strong>
+            </div>
+            <div>
+              <span>Date</span>
+              <strong id="lightboxDate">-</strong>
+            </div>
+          </div>
+
+          <div id="lightboxTags" class="chip-list"></div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="site-footer">
+      <div class="container footer-wrap">
+        <div>
+          <p>Designed &amp; Developed by Sakshu1347</p>
+        </div>
+        <div>
+          <p>&copy; <span id="year"></span> Sakshu1347. All rights reserved.</p>
+          <a href="index.html#top">Back to top</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
